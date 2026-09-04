@@ -9,7 +9,9 @@ body {
   margin: 0;
   background: theme('colors.canvas');
   color: theme('colors.ink.DEFAULT');
+  font-family: theme('fontFamily.sans');
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 input, select, textarea, button { font: inherit; }

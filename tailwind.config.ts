@@ -16,8 +16,9 @@ export default {
         info:   { 50:'#e6f6fb',100:'#c2e9f5',500:'#0d94b8',600:'#0a7794' },
       },
       fontFamily: {
-        sans: ['var(--font-sans)', '-apple-system', 'BlinkMacSystemFont',
-               'Segoe UI', 'Roboto', 'Helvetica Neue', 'sans-serif'],
+        // Pila del sistema: se ve nativa en cada plataforma y no añade descargas.
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Segoe UI',
+               'Roboto', 'Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       boxShadow: {
         card: '0 1px 2px rgba(15,23,41,.04), 0 8px 24px -12px rgba(15,23,41,.12)',
