@@ -41,7 +41,7 @@ export default function PanelCobranza({
   function cambiarFiltro(clave: string, valor: string) {
     const p = new URLSearchParams(parametros.toString())
     if (valor) p.set(clave, valor); else p.delete(clave)
-    router.replace(`${ruta}?${p.toString()}` as never, { scroll: false })
+    router.replace(`${ruta}?${p.toString()}`, { scroll: false })
   }
 
   function generarMes() {

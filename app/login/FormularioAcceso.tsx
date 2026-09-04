@@ -39,7 +39,7 @@ export default function FormularioAcceso() {
       return
     }
 
-    router.replace(siguiente as never)
+    router.replace(siguiente)
     router.refresh()
   }
 

@@ -197,7 +197,7 @@ export default async function PaginaTablero({
                   </Card>
                 )
                 return a.enlace
-                  ? <Link key={i} href={a.enlace as never} className="block">{contenido}</Link>
+                  ? <Link key={i} href={a.enlace} className="block">{contenido}</Link>
                   : <div key={i}>{contenido}</div>
               })}
             </div>

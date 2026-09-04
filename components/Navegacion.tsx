@@ -87,7 +87,7 @@ function Enlace({ destino, activo: esActivo, onClick }: {
 }) {
   const Ico = destino.icono
   return (
-    <Link href={destino.href as never} onClick={onClick}
+    <Link href={destino.href} onClick={onClick}
           aria-current={esActivo ? 'page' : undefined}
           className={`mb-0.5 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[14px] font-medium transition
             ${esActivo ? 'bg-brand-50 text-brand-600' : 'text-ink-soft hover:bg-canvas'}`}>
@@ -112,7 +112,7 @@ export function BarraInferior() {
             const Ico = d.icono
             const esActivo = activo(ruta, d.href)
             return (
-              <Link key={d.href} href={d.href as never} aria-current={esActivo ? 'page' : undefined}
+              <Link key={d.href} href={d.href} aria-current={esActivo ? 'page' : undefined}
                     className={`flex flex-col items-center gap-0.5 py-2.5 transition
                       ${esActivo ? 'text-brand-500' : 'text-ink-mute'}`}>
                 <Ico className="h-[21px] w-[21px]" />
@@ -163,7 +163,7 @@ export function SelectorMes({ mes }: { mes: string }) {
   function ir(nuevoMes: string) {
     const p = new URLSearchParams(parametros.toString())
     p.set('mes', nuevoMes)
-    router.push(`${ruta}?${p.toString()}` as never)
+    router.push(`${ruta}?${p.toString()}`)
   }
 
   return (

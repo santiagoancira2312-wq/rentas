@@ -46,7 +46,7 @@ export default function AccionesRapidas() {
           {ACCIONES.map(a => {
             const Ico = a.icono
             return (
-              <Link key={a.href} href={a.href as never} role="menuitem"
+              <Link key={a.href} href={a.href} role="menuitem"
                     onClick={() => setAbierto(false)}
                     className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[14px]
                                font-medium text-ink-soft transition hover:bg-canvas">
