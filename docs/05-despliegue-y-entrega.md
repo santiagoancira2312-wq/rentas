@@ -12,6 +12,9 @@
 
 En el panel de Supabase, sección **SQL Editor**, ejecuta en este orden:
 
+Pega el contenido de **`supabase/instalar.sql`**, que reúne las tres migraciones en
+un solo archivo, y ejecútalo. Si prefieres aplicarlas por separado:
+
 ```
 supabase/migrations/0001_schema.sql     Tablas, tipos e índices
 supabase/migrations/0002_logica.sql     Vistas de cálculo, generación de cargos, auditoría
@@ -21,26 +24,28 @@ supabase/migrations/0003_seguridad.sql  Políticas de acceso por rol
 ### Paso 3 · Cargar la información del Excel
 
 ```bash
-python3 scripts/migrar_excel.py 5_de_mayo.xlsx > supabase/seed.sql
+python3 scripts/migrar_excel.py 5_de_mayo.xlsx > supabase/datos-5-de-mayo.sql
 ```
 
 Ejecuta el resultado en el SQL Editor. El script puede repetirse sin duplicar nada.
 
+Ejecuta el archivo generado, o directamente **`supabase/datos-5-de-mayo.sql`**, que
+ya viene generado en el repositorio.
+
 Si es una propiedad nueva sin histórico, sáltate este paso y usa
-`supabase/seed-minimo.sql`, que sólo crea la propiedad y los catálogos.
+**`supabase/datos-nuevos.sql`**, que sólo crea la propiedad y los catálogos.
 
 ### Paso 4 · Crear el primer usuario
 
-En **Authentication → Users → Add user**, con correo y contraseña. Después, en el
-SQL Editor, dale acceso como propietario:
+En **Authentication → Users → Add user**, con correo y contraseña, marcando
+*Auto Confirm User*. Después, en el SQL Editor:
 
 ```sql
-insert into memberships (profile_id, property_id, role)
-select u.id, p.id, 'owner'
-from auth.users u, properties p
-where u.email = 'correo@delcliente.com'
-limit 1;
+select dar_acceso('correo@delcliente.com');
 ```
+
+La misma función sirve para dar acceso con otro rol:
+`select dar_acceso('otro@correo.com', 'admin');`
 
 ### Paso 5 · Publicar la aplicación
 

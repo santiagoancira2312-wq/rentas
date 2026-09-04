@@ -43,7 +43,8 @@ lib/
   format.ts                      Moneda, fechas y meses en español
 supabase/
   migrations/                    Esquema versionado
-  seed.sql                       Carga inicial generada del Excel
+  instalar.sql                   Todo el esquema en un archivo
+  datos-5-de-mayo.sql            Carga inicial generada del Excel
 scripts/
   migrar_excel.py                Generador de la carga inicial
 ```

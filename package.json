@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "db:seed": "python3 scripts/migrar_excel.py $npm_config_xlsx > supabase/seed.sql"
+    "db:datos": "python3 scripts/migrar_excel.py $npm_config_xlsx > supabase/datos-5-de-mayo.sql"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

@@ -3,9 +3,11 @@
 ## 4.1 Cómo se ejecuta
 
 ```bash
-python3 scripts/migrar_excel.py 5_de_mayo.xlsx > supabase/seed.sql
-psql "$DATABASE_URL" -f supabase/seed.sql
+python3 scripts/migrar_excel.py 5_de_mayo.xlsx > supabase/datos-5-de-mayo.sql
 ```
+
+El archivo resultante se pega en el SQL Editor de Supabase. Ya viene generado en el
+repositorio, así que este comando sólo hace falta si el Excel cambia.
 
 El script no toca el archivo original y puede volver a ejecutarse: todas las inserciones
 usan identificadores estables y `on conflict do nothing`, así que una segunda corrida no

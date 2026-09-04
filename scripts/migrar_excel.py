@@ -2,7 +2,7 @@
 """
 Convierte el libro de Excel original en un archivo SQL de carga inicial.
 
-    python3 scripts/migrar_excel.py <archivo.xlsx> > supabase/seed.sql
+    python3 scripts/migrar_excel.py <archivo.xlsx> > supabase/datos-5-de-mayo.sql
 
 No inventa información: lo que el Excel no tiene (nombres de inquilinos,
 teléfonos, contratos) se marca explícitamente para que el cliente lo complete.

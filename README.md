@@ -33,16 +33,22 @@ estatus, días de atraso, resúmenes mensuales y consumos de agua se calculan en
 base de datos, en un solo lugar, de modo que el tablero y el resumen mensual no
 pueden mostrar cifras distintas.
 
-## Puesta en marcha
+## Empezar
+
+Para abrirla y probarla por primera vez, sigue
+**[`docs/00-empezar.md`](docs/00-empezar.md)** — unos 10 minutos, sin instalar nada.
+
+En resumen: crear un proyecto en Supabase, pegar `supabase/instalar.sql` y
+`supabase/datos-5-de-mayo.sql` en su editor, crear tu usuario y publicar el
+repositorio en Vercel con dos variables de entorno.
+
+Para desarrollo local:
 
 ```bash
 npm install
 cp .env.example .env.local     # llena las dos variables de Supabase
 npm run dev                    # http://localhost:3000
 ```
-
-Para crear la base de datos y publicar la aplicación, sigue
-[`docs/05-despliegue-y-entrega.md`](docs/05-despliegue-y-entrega.md).
 
 ```bash
 npm run build       # compila para producción
@@ -66,8 +72,9 @@ lib/
   format.ts         Moneda, fechas y meses en español
 supabase/
   migrations/       Esquema versionado
-  seed.sql          Carga inicial generada del Excel
-  seed-minimo.sql   Carga inicial para una propiedad nueva
+  instalar.sql          Todo el esquema en un archivo, para pegar en Supabase
+  datos-5-de-mayo.sql   Carga inicial generada del Excel
+  datos-nuevos.sql      Carga inicial para una propiedad nueva
 scripts/
   migrar_excel.py   Convierte el libro de Excel en la carga inicial
 docs/               Análisis, modelo de datos, arquitectura, migración y entrega
@@ -77,6 +84,7 @@ docs/               Análisis, modelo de datos, arquitectura, migración y entre
 
 | Documento | Contenido |
 |---|---|
+| [00 · Empezar](docs/00-empezar.md) | Cómo abrir la aplicación y probarla en 10 minutos |
 | [01 · Análisis del Excel](docs/01-analisis-excel.md) | Cómo funciona hoy el control, fórmulas, 13 inconsistencias detectadas |
 | [02 · Modelo de datos](docs/02-modelo-datos.md) | Entidades, relaciones y qué calcula la base de datos |
 | [03 · Arquitectura](docs/03-arquitectura.md) | Stack, organización, navegación, roles y diseño |
