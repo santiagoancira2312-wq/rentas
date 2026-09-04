@@ -15,7 +15,7 @@ export interface DatosTablero {
   /** Cartera vencida de este mes y todos los anteriores. */
   cartera: { monto: number; cantidad: number }
   porVencer: { monto: number; cantidad: number; cargos: Cargo[] }
-  vencidos: Cargo[]
+  vencidos: (Cargo & { unidad: string })[]
   serie: ResumenMensual[]
   ingresosPorTipo: { tipo: string; monto: number }[]
   egresosPorCategoria: { categoria: string; monto: number; color: string }[]
@@ -100,7 +100,13 @@ export async function datosTablero(
       cantidad: proximos.length,
       cargos: proximos,
     },
-    vencidos: cargos.filter(c => c.is_overdue).sort((a, b) => b.balance - a.balance),
+    vencidos: cargos
+      .filter(c => c.is_overdue)
+      .map(c => ({
+        ...c,
+        unidad: listaUnidades.find(u => u.id === c.unit_id)?.name ?? c.concept,
+      }))
+      .sort((a, b) => Number(b.balance) - Number(a.balance)),
     serie,
     ingresosPorTipo: [...porTipo.entries()]
       .map(([tipo, monto]) => ({ tipo, monto }))
@@ -109,7 +115,12 @@ export async function datosTablero(
     egresosPorCategoria: [...porCategoria.entries()]
       .map(([categoria, v]) => ({ categoria, ...v }))
       .sort((a, b) => b.monto - a.monto),
-    alertas: construirAlertas(cartera, proximos, listaUnidades, resumen),
+    // Se pasan sólo las unidades que ya existían en el mes consultado, para que
+    // la alerta de vacantes no contradiga al anillo de ocupación.
+    alertas: construirAlertas(
+      cartera, proximos,
+      listaUnidades.filter(u => u.active_from <= hasta),
+      resumen),
   }
 }
 

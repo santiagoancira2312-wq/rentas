@@ -113,10 +113,11 @@ export function GraficaBarrasHorizontales({ datos, alturaFila = 40 }: {
 export function GraficaConsumo({ datos }: { datos: { dia: number; consumo: number }[] }) {
   return (
     <ResponsiveContainer width="100%" height={190}>
-      <BarChart data={datos} margin={{ top: 8, right: 8, left: -18, bottom: 0 }}>
+      <BarChart data={datos} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
         <CartesianGrid stroke="#eef0f4" vertical={false} />
         <XAxis dataKey="dia" tickLine={false} axisLine={false} tick={EJE} interval="preserveStartEnd" />
-        <YAxis tickLine={false} axisLine={false} width={38} tick={EJE} />
+        <YAxis tickLine={false} axisLine={false} width={52} tick={EJE}
+               tickFormatter={v => Number(v).toFixed(1)} />
         <Tooltip contentStyle={CAJA} cursor={{ fill: '#f7f8fa' }}
                  formatter={v => [`${Number(v).toFixed(2)} m³`, 'Consumo']}
                  labelFormatter={l => `Día ${l}`} />

@@ -167,7 +167,12 @@ def main() -> None:
         n += 1
         tid, lid = uuid_de(0x40, n), uuid_de(0x50, n)
         ids_inquilino[nombre] = tid
+        # Se indexa por ambos nombres: el del Excel y el del catálogo. Sin esto,
+        # una unidad renombrada (SUSHI → Sushi) quedaba sin contrato enlazado.
         ids_lease[nombre] = lid
+        if excel:
+            ids_inquilino[excel] = tid
+            ids_lease[excel] = lid
         real = nombre == "Cuarto 7 SB"
         filas_inq.append(
             f"  ({sql(tid)}, {sql(PROPIEDAD)}, {sql('Billy' if real else f'Inquilino de {nombre}')}, "

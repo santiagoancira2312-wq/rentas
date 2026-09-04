@@ -172,15 +172,20 @@ export function SelectorMes({ mes }: { mes: string }) {
               className="grid h-8 w-8 place-items-center rounded-lg text-ink-mute transition hover:bg-canvas">
         ‹
       </button>
-      <input type="month" value={mes} onChange={e => e.target.value && ir(e.target.value)}
-             aria-label="Mes y año"
-             className="w-[8.5rem] cursor-pointer rounded-lg border-0 bg-transparent px-1 py-1
-                        text-center text-[14px] font-semibold outline-none focus:bg-canvas" />
+      {/* El selector nativo rotula los meses en el idioma del sistema operativo.
+          Se muestra el nombre en español y el control queda encima, invisible. */}
+      <label className="relative block w-[9rem] cursor-pointer rounded-lg px-1 py-1.5
+                        text-center text-[14px] font-semibold transition
+                        hover:bg-canvas focus-within:bg-canvas">
+        <span aria-hidden>{nombreMes(mes)}</span>
+        <input type="month" value={mes} onChange={e => e.target.value && ir(e.target.value)}
+               aria-label={`Mes y año, actualmente ${nombreMes(mes)}`}
+               className="absolute inset-0 h-full w-full cursor-pointer opacity-0" />
+      </label>
       <button type="button" onClick={() => ir(sumarMeses(mes, 1))} aria-label="Mes siguiente"
               className="grid h-8 w-8 place-items-center rounded-lg text-ink-mute transition hover:bg-canvas">
         ›
       </button>
-      <span className="sr-only">{nombreMes(mes)}</span>
     </div>
   )
 }

@@ -33,22 +33,26 @@ estatus, días de atraso, resúmenes mensuales y consumos de agua se calculan en
 base de datos, en un solo lugar, de modo que el tablero y el resumen mensual no
 pueden mostrar cifras distintas.
 
-## Empezar
-
-Para abrirla y probarla por primera vez, sigue
-**[`docs/00-empezar.md`](docs/00-empezar.md)** — unos 10 minutos, sin instalar nada.
-
-En resumen: crear un proyecto en Supabase, pegar `supabase/instalar.sql` y
-`supabase/datos-5-de-mayo.sql` en su editor, crear tu usuario y publicar el
-repositorio en Vercel con dos variables de entorno.
-
-Para desarrollo local:
+## Probarla ahora
 
 ```bash
 npm install
-cp .env.example .env.local     # llena las dos variables de Supabase
-npm run dev                    # http://localhost:3000
+npm run dev        # abre http://localhost:3000
 ```
+
+Sin credenciales de Supabase la aplicación arranca en **modo demostración**:
+levanta un Postgres embebido con los datos reales del Excel, entra sin contraseña
+y usa el mismo esquema y los mismos cálculos que la base real. Sirve para probarla
+y para enseñársela a un comprador sin configurar nada.
+
+## Ponerla en producción
+
+Crear un proyecto en Supabase, pegar `supabase/instalar.sql` y
+`supabase/datos-5-de-mayo.sql` en su editor, crear el usuario y publicar en Vercel
+con dos variables de entorno. En cuanto existe `NEXT_PUBLIC_SUPABASE_URL`, el modo
+demostración se apaga solo.
+
+Los pasos detallados están en **[`docs/00-empezar.md`](docs/00-empezar.md)**.
 
 ```bash
 npm run build       # compila para producción
@@ -66,6 +70,7 @@ app/
 components/         Interfaz: navegación, tarjetas, gráficas, formularios
 lib/
   acciones/         Escrituras (server actions) con verificación de permisos
+  demo/             Modo demostración: Postgres embebido y adaptador de consultas
   queries/          Consultas por módulo
   supabase/         Clientes de servidor y navegador, y sesión
   tipos.ts          Modelo de datos
@@ -106,3 +111,7 @@ de fila: un usuario de consulta no puede escribir aunque manipule la interfaz.
 ## Stack
 
 Next.js 16 · React 19 · TypeScript · Tailwind CSS · Recharts · Supabase (Postgres, Auth, RLS)
+
+El modo demostración usa PGlite, que es Postgres compilado a WebAssembly: corre el
+mismo `instalar.sql` que Supabase, así que no hay una segunda versión de la lógica
+que pueda desviarse de la real.

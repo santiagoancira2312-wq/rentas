@@ -12,6 +12,23 @@
 | Permisos | Políticas RLS en Postgres | El rol se verifica en la base de datos, no en el navegador |
 | Despliegue | Vercel | `git push` publica; dominio propio del cliente |
 
+### Modo demostración
+
+Cuando no hay credenciales de Supabase, la aplicación levanta **PGlite** —Postgres
+compilado a WebAssembly— dentro del mismo proceso de Node y aplica sobre él el mismo
+`supabase/instalar.sql` que se usa en producción.
+
+Esto importa por una razón concreta: no existe una segunda implementación de la
+lógica de negocio que pueda desviarse de la real. Las vistas, la generación de
+vencimientos y los cálculos son literalmente los mismos. Lo único específico del
+modo demostración es un adaptador (`lib/demo/cliente.ts`) que traduce las llamadas
+del cliente de Supabase a SQL, y que iguala los tipos que cada uno devuelve:
+Postgres entrega fechas como objetos y números exactos como texto, mientras que
+Supabase los manda en JSON como cadenas y números.
+
+Sirve para dos cosas: probar el sistema sin configurar nada, y enseñárselo a un
+comprador antes de crearle su base de datos.
+
 **Por qué no un backend propio**: escribir autenticación, permisos, respaldos y panel de
 administración desde cero añade meses de trabajo y una superficie de errores de seguridad
 que aquí no hace falta. Supabase entrega todo eso y, al vender, el proyecto se transfiere

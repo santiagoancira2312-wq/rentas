@@ -1,8 +1,16 @@
 import { cookies } from 'next/headers'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { esModoDemo } from '../demo/activo'
 
 /** Cliente para componentes y acciones de servidor. */
 export async function supabaseServidor() {
+  if (esModoDemo()) {
+    // Importación diferida: Postgres embebido no debe entrar en el paquete
+    // cuando la aplicación corre contra Supabase de verdad.
+    const { clienteDemo } = await import('../demo/cliente')
+    return (await clienteDemo()) as unknown as ReturnType<typeof createServerClient>
+  }
+
   const almacen = await cookies()
 
   return createServerClient(

@@ -11,6 +11,7 @@
     "db:datos": "python3 scripts/migrar_excel.py $npm_config_xlsx > supabase/datos-5-de-mayo.sql"
   },
   "dependencies": {
+    "@electric-sql/pglite": "^0.5.8",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.10",
     "next": "^16.3.4",

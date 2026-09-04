@@ -12,6 +12,7 @@
 -- ============================================================================
 
 
+
 -- ═══════════════════════════════════════════════════════════════════════
 -- Sección: 0001_schema.sql
 -- ═══════════════════════════════════════════════════════════════════════
@@ -514,11 +515,12 @@ with por_mes as (
     r.property_id,
     date_trunc('month', r.read_on)::date as month,
     count(*) filter (where r.consumption_day is not null and not r.is_estimated) as days_measured,
+    -- Las estimadas suelen venir de una lectura incompleta, así que no tienen
+    -- consumo calculable. Se cuentan igual para poder advertir de ellas.
     count(*) filter (where r.is_estimated)                                       as days_estimated,
-    sum(r.consumption_day)                                                       as total_m3,
+    sum(r.consumption_day) filter (where not r.is_estimated)                     as total_m3,
     avg(r.consumption_day) filter (where not r.is_estimated)                     as avg_m3_day
   from water_readings r
-  where r.consumption_day is not null
   group by 1, 2
 )
 select
@@ -800,7 +802,7 @@ create trigger on_auth_user_created
 
 
 -- ═══════════════════════════════════════════════════════════════════════
--- Ayuda para dar acceso al primer usuario
+-- Ayuda para dar acceso-- ═══ al primer usuario
 -- ═══════════════════════════════════════════════════════════════════════
 
 /**

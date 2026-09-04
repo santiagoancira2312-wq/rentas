@@ -1,11 +1,23 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { esModoDemo } from './lib/demo/activo'
 
 /**
  * Refresca la sesión en cada navegación y protege las rutas privadas.
  * Sin esto, la sesión caduca en el servidor y el usuario ve pantallas vacías.
  */
 export async function middleware(request: NextRequest) {
+  // En la demostración no hay sesión que refrescar ni rutas que proteger.
+  if (esModoDemo()) {
+    if (request.nextUrl.pathname.startsWith('/login')) {
+      const destino = request.nextUrl.clone()
+      destino.pathname = '/'
+      destino.search = ''
+      return NextResponse.redirect(destino)
+    }
+    return NextResponse.next({ request })
+  }
+
   let respuesta = NextResponse.next({ request })
 
   const supabase = createServerClient(

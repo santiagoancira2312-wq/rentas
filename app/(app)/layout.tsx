@@ -1,5 +1,7 @@
 import { Suspense } from 'react'
 import { sesionActual } from '@/lib/supabase/sesion'
+import { esModoDemo } from '@/lib/demo/activo'
+import { AvisoDemo } from '@/components/AvisoDemo'
 import { BarraInferior, BarraLateral } from '@/components/Navegacion'
 
 export default async function LayoutApp({ children }: { children: React.ReactNode }) {
@@ -14,6 +16,7 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
       </Suspense>
 
       <div className="lg:pl-64">
+        {esModoDemo() && <AvisoDemo />}
         <main className="mx-auto max-w-6xl px-4 pb-28 pt-5 sm:px-6 lg:pb-10">
           {children}
         </main>

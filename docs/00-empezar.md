@@ -1,8 +1,54 @@
 # Empezar · Cómo abrir la aplicación y probarla
 
-Tiempo estimado: **10 minutos**. No necesitas instalar nada en tu computadora.
+Hay dos caminos. El primero es para verla funcionando **ahora mismo**; el segundo
+es el que se usa de verdad cuando ya se le entrega al cliente.
 
 ---
+
+# Camino rápido · Probarla en tu Mac en 3 minutos
+
+No necesitas crear cuentas ni configurar nada. La aplicación trae un **modo
+demostración** que levanta su propia base de datos con los datos reales del Excel.
+
+Necesitas [Node.js 20 o superior](https://nodejs.org) instalado una sola vez
+(descarga el instalador *LTS* para macOS y sigue el asistente).
+
+Abre la Terminal y pega esto:
+
+```bash
+git clone https://github.com/santiagoancira2312-wq/rentas.git
+cd rentas
+git checkout claude/rental-management-app-y0if3u
+npm install
+npm run dev
+```
+
+Cuando termine verás algo como:
+
+```
+   ▲ Next.js 16.3.4
+   - Local:  http://localhost:3000
+```
+
+Copia esa dirección y pégala en Safari. Entras directo, sin contraseña.
+
+**Qué es este modo**: corre un Postgres de verdad dentro del mismo programa, con el
+mismo esquema y los mismos cálculos que usará la base real. Lo que captures se
+conserva mientras la Terminal siga abierta y vuelve al estado inicial cuando la
+cierres. Una franja amarilla arriba te lo recuerda siempre.
+
+Para detenerlo, presiona `Control + C` en la Terminal.
+
+Sirve también para **enseñársela a un comprador** sin haberle creado nada todavía.
+
+---
+
+# Camino completo · Con base de datos real
+
+Es el que se usa al entregar el sistema: cada quien con su usuario y contraseña,
+datos sincronizados entre dispositivos y respaldos automáticos.
+
+Tiempo estimado: **10 minutos**.
 
 ## Paso 1 · Crear la base de datos (4 min)
 
@@ -65,26 +111,19 @@ correo y la contraseña del paso 4, y ya estás dentro.
 > **Importante**: si la rama del repositorio es `claude/rental-management-app-y0if3u`
 > y no `main`, en Vercel entra a *Settings → Git → Production Branch* y ponla ahí.
 
----
+### Correrla en tu Mac contra la base real
 
-## Alternativa: probarla en tu computadora
-
-Si prefieres correrla local en lugar de publicarla, necesitas
-[Node.js 20 o superior](https://nodejs.org):
+Si prefieres no publicarla todavía:
 
 ```bash
-git clone https://github.com/santiagoancira2312-wq/rentas.git
-cd rentas
-git checkout claude/rental-management-app-y0if3u
-npm install
-
 cp .env.example .env.local
-# abre .env.local y pega las dos claves de Supabase (paso 5)
-
+# abre .env.local y pega las dos claves del paso 5
 npm run dev
 ```
 
-Abre `http://localhost:3000`.
+En cuanto existe `.env.local` con la dirección de Supabase, el modo demostración se
+apaga solo y la aplicación pide usuario y contraseña. Si quieres volver a la
+demostración sin borrar el archivo, agrega `MODO_DEMO=1` dentro de `.env.local`.
 
 ---
 
@@ -114,5 +153,7 @@ Con los datos del Excel cargados, este recorrido toca todo lo importante:
 |---|---|
 | *Invalid login credentials* | El usuario no está confirmado. Vuelve a crearlo con **Auto Confirm User** marcado. |
 | Entra pero dice "Tu cuenta aún no tiene acceso" | Falta ejecutar `select dar_acceso('tu-correo');` |
+| Sale la franja amarilla cuando no debería | Hay credenciales, pero el servidor arrancó antes de guardarlas. Detén con `Control + C` y vuelve a `npm run dev`. |
+| `npm: command not found` | Falta instalar Node.js. |
 | Las pantallas se ven vacías | No se ejecutó el archivo de datos del paso 3. |
 | Error al compilar en Vercel | Revisa que las dos variables de entorno estén escritas exactamente como en la tabla. |

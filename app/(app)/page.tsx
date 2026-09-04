@@ -219,9 +219,9 @@ export default async function PaginaTablero({
               {d.vencidos.slice(0, 6).map(c => (
                 <div key={c.id} className="flex items-center justify-between gap-3 px-4 py-3">
                   <div className="min-w-0">
-                    <p className="truncate text-[14px] font-semibold">{c.concept}</p>
+                    <p className="truncate text-[14px] font-semibold">{c.unidad}</p>
                     <p className="text-[12px] text-ink-mute">
-                      Venció el {fechaCorta(c.due_date)} · {c.days_late} día(s)
+                      {c.concept} · venció el {fechaCorta(c.due_date)} · {c.days_late} día(s)
                     </p>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
