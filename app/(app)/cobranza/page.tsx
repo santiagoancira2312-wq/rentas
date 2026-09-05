@@ -32,7 +32,7 @@ export default async function PaginaCobranza({
       <Encabezado titulo="Cobranza" descripcion={nombreMes(mes)} mes={mes} />
 
       <Seccion>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <Kpi etiqueta="Esperado del mes" valor={money(totales.esperado)} />
           <Kpi etiqueta="Cobrado" valor={money(totales.cobrado)} acento="text-good-600" />
           <Kpi etiqueta="Pendiente" valor={money(totales.pendiente)} acento="text-warn-600" />

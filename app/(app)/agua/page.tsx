@@ -34,7 +34,7 @@ export default async function PaginaAgua({
           : null} />
 
       <Seccion titulo="Consumo del mes">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           <KpiDestacado tono="info" etiqueta="Costo estimado del mes"
                         valor={money(resumen.costoEstimado)}
                         icono={<IcGota className="h-5 w-5" />}

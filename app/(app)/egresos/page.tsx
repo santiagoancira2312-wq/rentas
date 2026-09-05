@@ -56,7 +56,7 @@ export default async function PaginaEgresos({
           : null} />
 
       <Seccion>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <Kpi etiqueta="Total del mes" valor={money(total)} acento="text-bad-600" />
           <Kpi etiqueta="Movimientos" valor={String(egresos.length)} />
           <Kpi etiqueta="Categoría mayor"

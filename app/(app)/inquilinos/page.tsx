@@ -33,7 +33,7 @@ export default async function PaginaInquilinos({
                     : null} />
 
       <Seccion>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-3 gap-3">
           <Kpi etiqueta="Inquilinos" valor={String(filas.length)} />
           <Kpi etiqueta="Con contrato vigente" valor={String(conContrato)} acento="text-good-600" />
           <Kpi etiqueta="Unidades por asignar" valor={String(disponibles.length)}

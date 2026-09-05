@@ -54,7 +54,7 @@ export default async function PaginaDetalleUnidad({
       </header>
 
       <Seccion>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <Kpi etiqueta="Cobrado histórico" valor={money(cobrado)} acento="text-good-600" />
           <Kpi etiqueta="Adeudo vencido" valor={money(adeudo)}
                acento={adeudo > 0 ? 'text-bad-600' : 'text-ink'}

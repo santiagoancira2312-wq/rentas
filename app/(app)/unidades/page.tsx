@@ -40,7 +40,7 @@ export default async function PaginaUnidades({
           : null} />
 
       <Seccion>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-3 gap-3">
           <Kpi etiqueta="Total" valor={String(filas.length)} />
           <Kpi etiqueta="Ocupadas" valor={String(ocupadas)} acento="text-good-600" />
           <Kpi etiqueta="Disponibles" valor={String(disponibles)} acento="text-warn-600" />

@@ -81,7 +81,8 @@ export default function PanelAgua({
               {puedeEscribir && (
                 <button type="button" onClick={() => setPorEliminar(l)}
                         aria-label={`Eliminar lectura del ${fechaCorta(l.read_on)}`}
-                        className="shrink-0 text-ink-mute transition hover:text-bad-600">
+                        className="grid h-11 w-11 shrink-0 place-items-center rounded-lg
+                                   text-ink-mute transition hover:bg-bad-50 hover:text-bad-600">
                   <IcBasura className="h-4 w-4" />
                 </button>
               )}

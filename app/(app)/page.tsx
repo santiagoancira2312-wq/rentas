@@ -37,7 +37,7 @@ export default async function PaginaTablero({
 
       {/* ── Cifras del mes ─────────────────────────────────────────── */}
       <Seccion titulo="Resultado del mes">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           <KpiDestacado
             tono={resumen.net_income >= 0 ? 'brand' : 'bad'}
             etiqueta="Utilidad neta"
@@ -159,7 +159,7 @@ export default async function PaginaTablero({
                 <div className="mb-3 flex items-center justify-between">
                   <p className="text-[14px] font-semibold">Egresos por categoría</p>
                   <Link href={{ pathname: '/egresos', query: { mes } }}
-                        className="inline-flex items-center gap-0.5 text-[12px] font-semibold text-brand-500">
+                        className="-my-2 inline-flex min-h-[44px] items-center gap-0.5 px-1 py-2 text-[12px] font-semibold text-brand-500">
                     Detalle <IcChevron className="h-3.5 w-3.5" />
                   </Link>
                 </div>
@@ -207,7 +207,7 @@ export default async function PaginaTablero({
         <Seccion titulo="Con saldo vencido" accion={
           d.vencidos.length > 0 ? (
             <Link href={{ pathname: '/cobranza', query: { mes, estado: 'vencidos' } }}
-                  className="inline-flex items-center gap-0.5 text-[12px] font-semibold text-brand-500">
+                  className="-my-2 inline-flex min-h-[44px] items-center gap-0.5 px-1 py-2 text-[12px] font-semibold text-brand-500">
               Ver todos <IcChevron className="h-3.5 w-3.5" />
             </Link>
           ) : null

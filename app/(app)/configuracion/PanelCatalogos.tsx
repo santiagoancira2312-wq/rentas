@@ -46,7 +46,7 @@ export default function PanelCatalogos({
             )}
             <button type="button" onClick={() => puedeEscribir && setEditando(f)}
                     disabled={!puedeEscribir}
-                    className="min-w-0 flex-1 text-left disabled:cursor-default">
+                    className="min-h-[44px] min-w-0 flex-1 text-left disabled:cursor-default">
               <span className="text-[14px] font-semibold">{f.name}</span>
               {'billing_mode' in f && f.billing_mode === 'nightly' && (
                 <Badge clase="ml-2 bg-info-50 text-info-600">Por noche</Badge>
@@ -60,7 +60,8 @@ export default function PanelCatalogos({
                       onClick={() => desactivar(async () => {
                         await desactivarCatalogo(tabla, f.id); router.refresh()
                       })}
-                      className="shrink-0 text-[12px] font-semibold text-ink-mute transition hover:text-bad-600">
+                      className="-my-2 min-h-[44px] shrink-0 px-2 py-2 text-[12px] font-semibold
+                                 text-ink-mute transition hover:text-bad-600">
                 Desactivar
               </button>
             )}

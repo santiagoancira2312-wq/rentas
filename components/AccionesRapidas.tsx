@@ -32,9 +32,11 @@ export default function AccionesRapidas() {
 
   return (
     <div className="relative" ref={contenedor}>
+      {/* En el teléfono sólo se ve el «+», así que el nombre va en aria-label:
+          sin él, el botón queda mudo para lectores de pantalla. */}
       <button type="button" onClick={() => setAbierto(v => !v)}
-              aria-expanded={abierto} aria-haspopup="menu"
-              className="btn-primary">
+              aria-expanded={abierto} aria-haspopup="menu" aria-label="Registrar"
+              className="btn-primary min-h-[44px] px-4">
         <IcMas className="h-[18px] w-[18px]" />
         <span className="hidden sm:inline">Registrar</span>
       </button>

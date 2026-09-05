@@ -50,7 +50,7 @@ export default async function PaginaResumen({
       ) : (
         <>
           <Seccion titulo={nombreMes(mes)}>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
               <KpiDestacado tono={actual.net_income >= 0 ? 'brand' : 'bad'}
                             etiqueta="Utilidad del mes" valor={money(actual.net_income)}
                             pie={previo
@@ -85,6 +85,11 @@ export default async function PaginaResumen({
         {historico.length === 0 ? (
           <Vacio icono="📅" titulo="Todavía no hay meses registrados" />
         ) : (
+          <>
+          {/* En el teléfono la tabla no cabe completa y se corta sin avisar. */}
+          <p className="mb-2 px-1 text-[12px] text-ink-mute lg:hidden">
+            Desliza la tabla hacia los lados para ver todas las columnas.
+          </p>
           <Card className="overflow-x-auto">
             <table className="w-full min-w-[46rem] text-[14px]">
               <thead>
@@ -144,6 +149,7 @@ export default async function PaginaResumen({
               </tfoot>
             </table>
           </Card>
+          </>
         )}
       </Seccion>
     </>
