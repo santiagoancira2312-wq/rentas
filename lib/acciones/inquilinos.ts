@@ -48,6 +48,14 @@ export async function guardarContrato(datos: FormData): Promise<Resultado> {
   if (!inquilinoId) return { ok: false, error: 'Elige el inquilino.' }
   if (!inicio) return { ok: false, error: 'Captura la fecha de inicio del contrato.' }
   if (renta <= 0) return { ok: false, error: 'La renta debe ser mayor que cero.' }
+  // Mismas reglas que el alta de unidades: un día fuera de rango se guarda sin
+  // protestar y luego el contrato nunca genera un solo vencimiento.
+  if (frecuencia === 'monthly' && (diaCobro < 1 || diaCobro > 28)) {
+    return { ok: false, error: 'El día de corte del mes debe estar entre 1 y 28.' }
+  }
+  if (frecuencia === 'weekly' && (diaCobro < 0 || diaCobro > 6)) {
+    return { ok: false, error: 'Elige un día de la semana válido.' }
+  }
 
   const fin = aFecha(datos.get('fin'))
   if (fin && fin < inicio) {

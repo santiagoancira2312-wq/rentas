@@ -43,11 +43,23 @@ export async function guardarLectura(datos: FormData): Promise<Resultado> {
       notes: aTexto(datos.get('notas')),
     }
 
-    const { error } = id
-      ? await supabase.from('water_readings').update(fila).eq('id', id)
-      : await supabase.from('water_readings')
-          .upsert({ ...fila, created_by: usuarioId },
-                  { onConflict: 'property_id,unit_id,read_on' })
+    // El índice único (property_id, unit_id, read_on) no aplica cuando unit_id
+    // es nulo —el medidor general—, porque Postgres considera distintos dos
+    // nulos: el `on conflict` no encuentra nada y en vez de corregir la lectura
+    // del día inserta otra, y el consumo del mes se cuenta dos veces. Por eso
+    // se busca primero la lectura de ese día y se actualiza si ya existe.
+    const existente = id ? { id } : await (async () => {
+      const consulta = supabase.from('water_readings').select('id')
+        .eq('property_id', propiedadId).eq('read_on', fecha)
+      const { data } = await (fila.unit_id
+        ? consulta.eq('unit_id', fila.unit_id)
+        : consulta.is('unit_id', null)).maybeSingle()
+      return data as { id: string } | null
+    })()
+
+    const { error } = existente
+      ? await supabase.from('water_readings').update(fila).eq('id', existente.id)
+      : await supabase.from('water_readings').insert({ ...fila, created_by: usuarioId })
 
     if (error) throw new Error(error.message)
   })

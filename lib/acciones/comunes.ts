@@ -53,10 +53,16 @@ export function mensajeDeError(fallo: unknown): string {
   return 'No se pudo guardar. Revisa los datos e inténtalo de nuevo.'
 }
 
-/** Lee un número de un formulario, aceptando comas y espacios. */
+/**
+ * Lee un número de un formulario, aceptando comas y espacios.
+ * Un campo vacío devuelve el valor por omisión, no cero: escribir 0 y no
+ * escribir nada son cosas distintas, y confundirlas guardaba un día de cobro
+ * de 0 en los contratos, que nunca genera vencimientos.
+ */
 export function aNumero(valor: FormDataEntryValue | null, porOmision = 0): number {
   if (valor == null) return porOmision
   const limpio = String(valor).replace(/[^0-9.-]/g, '')
+  if (limpio === '') return porOmision
   const n = Number(limpio)
   return Number.isFinite(n) ? n : porOmision
 }
