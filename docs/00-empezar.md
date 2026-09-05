@@ -41,6 +41,34 @@ Para detenerlo, presiona `Control + C` en la Terminal.
 
 Sirve también para **enseñársela a un comprador** sin haberle creado nada todavía.
 
+### Abrirla desde el iPhone
+
+Al arrancar, la Terminal imprime **dos** direcciones:
+
+```
+   - Local:    http://localhost:3000
+   - Network:  http://192.168.1.72:3000
+```
+
+La segunda —la de **Network**— es la que funciona desde el teléfono. Escríbela en
+Safari con el iPhone **conectado al mismo WiFi** que la Mac y abre igual que en la
+computadora. El número cambia según la red, así que cópialo de tu Terminal, no de
+este ejemplo.
+
+Una vez abierta, para que se vea como una app de verdad:
+
+1. Toca el botón de **compartir** (el cuadro con la flecha hacia arriba).
+2. Elige **Agregar a pantalla de inicio**.
+3. Queda un icono llamado **Rentas** junto a las demás apps.
+
+Al abrirla desde ese icono arranca a pantalla completa, sin la barra de Safari. Es
+lo más cerca que se llega a una app nativa sin pasar por la App Store.
+
+> **Sólo funciona en la misma red.** Si necesitas mandar un enlace que abra desde
+> cualquier lado —otra casa, datos móviles— hay que publicarla, que es el camino
+> completo de más abajo. Mientras tanto, para una demostración en persona basta con
+> el WiFi compartido.
+
 ---
 
 # Camino completo · Con base de datos real

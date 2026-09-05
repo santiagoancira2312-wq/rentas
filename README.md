@@ -45,6 +45,10 @@ levanta un Postgres embebido con los datos reales del Excel, entra sin contrase�
 y usa el mismo esquema y los mismos cálculos que la base real. Sirve para probarla
 y para enseñársela a un comprador sin configurar nada.
 
+Para verla en el teléfono, usa la dirección **Network** que imprime la Terminal
+(`http://192.168.x.x:3000`) desde el mismo WiFi. Se puede agregar a la pantalla de
+inicio y abre a pantalla completa, sin la barra del navegador.
+
 ## Ponerla en producción
 
 Crear un proyecto en Supabase, pegar `supabase/instalar.sql` y
