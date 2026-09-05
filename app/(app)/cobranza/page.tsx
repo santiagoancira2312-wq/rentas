@@ -35,7 +35,8 @@ export default async function PaginaCobranza({
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <Kpi etiqueta="Esperado del mes" valor={money(totales.esperado)} />
           <Kpi etiqueta="Cobrado" valor={money(totales.cobrado)} acento="text-good-600" />
-          <Kpi etiqueta="Pendiente" valor={money(totales.pendiente)} acento="text-warn-600" />
+          <Kpi etiqueta="Pendiente" valor={money(totales.pendiente)} acento="text-warn-600"
+               pie={totales.aFavor > 0 ? `${money(totales.aFavor)} pagado de más` : undefined} />
         </div>
         <Card className="mt-3 p-4">
           <div className="mb-2 flex justify-between text-[13px]">

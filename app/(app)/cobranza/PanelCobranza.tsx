@@ -181,7 +181,9 @@ export default function PanelCobranza({
                           <p className="text-[11px] text-ink-mute">
                             {f.balance > 0
                               ? `Saldo ${money(f.balance)}`
-                              : `Esperado ${money(f.amount_expected)}`}
+                              : Number(f.surplus) > 0
+                                ? `A favor ${money(f.surplus)}`
+                                : `Esperado ${money(f.amount_expected)}`}
                           </p>
                         </div>
                       </button>

@@ -130,6 +130,8 @@ export interface Cargo {
   status: ChargeStatus
   days_late: number
   is_overdue: boolean
+  /** Lo cobrado por encima de lo esperado. No reduce la deuda de otros cargos. */
+  surplus: number
 }
 
 export interface Pago {
@@ -204,6 +206,7 @@ export interface ResumenMensual {
   expenses: number
   net_income: number
   collection_rate: number
+  surplus: number
 }
 
 export interface Ocupacion {

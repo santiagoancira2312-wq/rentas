@@ -25,7 +25,7 @@ export interface DatosTablero {
 const RESUMEN_VACIO = (propiedadId: string, mes: string): ResumenMensual => ({
   property_id: propiedadId, month: `${mes}-01`,
   expected: 0, collected: 0, outstanding: 0, overdue_count: 0,
-  overdue_amount: 0, expenses: 0, net_income: 0, collection_rate: 0,
+  overdue_amount: 0, expenses: 0, net_income: 0, collection_rate: 0, surplus: 0,
 })
 
 export async function datosTablero(

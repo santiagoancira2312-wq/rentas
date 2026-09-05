@@ -92,6 +92,9 @@ export default function HojaPago({
         <Fila etiqueta="Inquilino" valor={cargo.inquilino || 'Sin asignar'} />
         <Fila etiqueta="Importe esperado" valor={money(cargo.amount_expected)} />
         <Fila etiqueta="Cobrado hasta ahora" valor={money(cargo.amount_paid)} />
+        {Number(cargo.surplus) > 0 && (
+          <Fila etiqueta="Pagado de más" valor={money(cargo.surplus)} />
+        )}
         <div className="mt-2 flex items-center justify-between border-t border-line pt-2">
           <span className="text-[14px] text-ink-mute">Saldo actual</span>
           <div className="flex items-center gap-2">
@@ -120,7 +123,10 @@ export default function HojaPago({
         {importe > 0 && (
           <Alerta tipo={excede ? 'warn' : saldoResultante > 0 ? 'info' : 'good'}>
             {excede
-              ? <>El importe supera el saldo por {money(importe - Number(cargo.balance))}. Se registrará como pago a favor.</>
+              ? <>El importe supera el saldo por{' '}
+                  <strong>{money(importe - Number(cargo.balance))}</strong>. Ese excedente queda
+                  registrado en este vencimiento como pago a favor; no se descuenta solo de
+                  los siguientes.</>
               : saldoResultante > 0
                 ? <>Con este abono el saldo quedará en <strong>{money(saldoResultante)}</strong> y el vencimiento seguirá marcado como parcial.</>
                 : <>Con este pago el vencimiento queda <strong>saldado</strong>.</>}

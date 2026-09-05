@@ -5,7 +5,7 @@ import { COINCIDE, type FilaCobranza, type FiltrosCobranza } from './cobranza-co
 
 export interface DatosCobranza {
   filas: FilaCobranza[]
-  totales: { esperado: number; cobrado: number; pendiente: number; avance: number }
+  totales: { esperado: number; cobrado: number; pendiente: number; aFavor: number; avance: number }
   conteos: Record<string, number>
 }
 
@@ -46,6 +46,11 @@ export async function datosCobranza(
   const cobrables = todos.filter(c => c.status !== 'waived')
   const esperado = cobrables.reduce((s, c) => s + Number(c.amount_expected), 0)
   const cobrado = todos.reduce((s, c) => s + Number(c.amount_paid), 0)
+  // El pendiente se suma cargo por cargo, no como esperado menos cobrado: si
+  // alguien paga de más en una unidad, esa diferencia no debe descontarse de
+  // lo que deben las demás.
+  const pendiente = cobrables.reduce((s, c) => s + Number(c.balance), 0)
+  const aFavor = todos.reduce((s, c) => s + Number(c.surplus), 0)
 
   const conteos: Record<string, number> = {}
   for (const [clave, prueba] of Object.entries(COINCIDE)) {
@@ -67,8 +72,9 @@ export async function datosCobranza(
     totales: {
       esperado,
       cobrado,
-      pendiente: Math.max(0, esperado - cobrado),
-      avance: esperado > 0 ? Math.min(100, (cobrado / esperado) * 100) : 0,
+      pendiente,
+      aFavor,
+      avance: esperado > 0 ? Math.min(100, ((esperado - pendiente) / esperado) * 100) : 0,
     },
     conteos,
   }
